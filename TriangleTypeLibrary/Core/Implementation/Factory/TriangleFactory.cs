@@ -32,7 +32,6 @@ namespace TriangleTypeLibrary.Core.Implementation.Factory
                 _container = new UnityContainer();
                 _container.RegisterType<ITriangleRepository, T>(new InjectionConstructor(
                     new NumbericValidation(),
-                    new ParseToNumberValidation(), 
                     new TriangleAxisesValidation())
                 );
                 unityContainer = _container.Resolve<ITriangleRepository>();
@@ -40,7 +39,7 @@ namespace TriangleTypeLibrary.Core.Implementation.Factory
             }
             catch (ResolutionFailedException)
             {
-                return (T) unityContainer;
+                return default(T);
             }
             catch (Exception ex)
             {

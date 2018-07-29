@@ -70,10 +70,8 @@
     <Compile Include="Core\Interfaces\Factory\ITriangleFactory.cs" />
     <Compile Include="Core\Interfaces\Repository\ITriangleRepository.cs" />
     <Compile Include="Cross\Helpers\Validation\Implementation\NumbericValidation.cs" />
-    <Compile Include="Cross\Helpers\Validation\Implementation\ParseToNumberValidation.cs" />
     <Compile Include="Cross\Helpers\Validation\Implementation\TriangleAxisesValidation.cs" />
     <Compile Include="Cross\Helpers\Validation\Interfaces\INumericValidation.cs" />
-    <Compile Include="Cross\Helpers\Validation\Interfaces\IParseToNumberValidation.cs" />
     <Compile Include="Cross\Helpers\Validation\Interfaces\ITriangleAxisesValidation.cs" />
     <Compile Include="Model\Entities\TriangleEntity.cs" />
     <Compile Include="Model\Interfaces\IEntity.cs" />

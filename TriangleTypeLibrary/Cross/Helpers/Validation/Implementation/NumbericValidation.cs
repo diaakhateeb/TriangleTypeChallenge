@@ -1,4 +1,5 @@
-﻿using TriangleTypeLibrary.Cross.Helpers.Validation.Interfaces;
+﻿using System;
+using TriangleTypeLibrary.Cross.Helpers.Validation.Interfaces;
 using TriangleTypeLibrary.Model.Entities;
 
 namespace TriangleTypeLibrary.Cross.Helpers.Validation.Implementation
@@ -15,11 +16,29 @@ namespace TriangleTypeLibrary.Cross.Helpers.Validation.Implementation
         /// </summary>
         /// <param name="entity">Triangle entity object.</param>
         /// <returns>Returns error string if values are invalid.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="Exception"></exception>
         public string GreaterThanZero(TriangleEntity entity)
         {
-            if (entity.Length <= 0 || entity.Height <= 0 || entity.Base <= 0)
-                return ("Some Triangle values are equal or less than zero.");
-            return string.Empty;
+            try
+            {
+                if (entity.Length <= 0 || entity.Height <= 0 || entity.Base <= 0)
+                    return ("Some Triangle values are equal or less than zero.");
+                return string.Empty;
+            }
+            catch (ArgumentNullException argNullEx)
+            {
+                throw argNullEx;
+            }
+            catch (ArgumentException argEx)
+            {
+                throw argEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

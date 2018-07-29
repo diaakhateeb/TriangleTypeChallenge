@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using TriangleTypeLibrary.Core.Enums;
 using TriangleTypeLibrary.Model.Interfaces;
 
@@ -14,20 +15,33 @@ namespace TriangleTypeLibrary.Model.Entities
         /// <summary>
         /// Gets Triangle type.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns TriangleType enum value.</returns>
+        /// <exception cref="FormatException"></exception>
+        /// <exception cref="Exception"></exception>
         public TriangleType FindTriangle()
         {
-            double[] triaArray = {Length, Height, Base};
+            try
+            {
+                double[] triaArray = {Length, Height, Base};
 
-            var valsCount = triaArray.Distinct().Count();
+                var valsCount = triaArray.Distinct().Count();
 
-            return valsCount == 1
-                ? TriangleType.Equilateral
-                : valsCount == 2
-                    ? TriangleType.Isosceles
-                    : valsCount == 3
-                        ? TriangleType.Scalene
-                        : TriangleType.Unknown;
+                return valsCount == 1
+                    ? TriangleType.Equilateral
+                    : valsCount == 2
+                        ? TriangleType.Isosceles
+                        : valsCount == 3
+                            ? TriangleType.Scalene
+                            : TriangleType.Unknown;
+            }
+            catch (InvalidOperationException invalOperaEx)
+            {
+                throw invalOperaEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>

@@ -12,9 +12,7 @@ namespace TriangleTypeLibrary.Core.Implementation.Repository
     /// </summary>
     public class TriangleRepository : ITriangleRepository
     {
-        //private readonly IInputValidation _validation;
         private readonly INumericValidation _numValidation;
-        private readonly IParseToNumberValidation _parseNumberValidation;
         private readonly ITriangleAxisesValidation _triangleAxisesValidation;
 
         /// <summary>
@@ -25,15 +23,14 @@ namespace TriangleTypeLibrary.Core.Implementation.Repository
         /// <param name="triangleAxisesValidationObj"></param>
         /// <exception cref="System.ArgumentNullException">Throws when inputValidation objectis not initialized.</exception>
         public TriangleRepository(INumericValidation numericValidationObj, 
-            IParseToNumberValidation parseToNumberValidationObj, ITriangleAxisesValidation triangleAxisesValidationObj)
+            ITriangleAxisesValidation triangleAxisesValidationObj)
         {
             try
             {
-                if(numericValidationObj == null || parseToNumberValidationObj == null || triangleAxisesValidationObj == null)
+                if(numericValidationObj == null || triangleAxisesValidationObj == null)
                     throw new ArgumentNullException("Some validation objects are null.");
 
                 _numValidation = numericValidationObj;
-                _parseNumberValidation = parseToNumberValidationObj;
                 _triangleAxisesValidation = triangleAxisesValidationObj;
             }
             catch (ArgumentNullException)
@@ -51,24 +48,45 @@ namespace TriangleTypeLibrary.Core.Implementation.Repository
         /// Validates Triangle axises values.
         /// </summary>
         /// <returns>Returns validation result boolean value.</returns>
+        /// <exception cref="System.NullReferenceException">Throws NullReferenceException.</exception>
         public string ValidateTriangleValues()
         {
-            var retVal = _parseNumberValidation.TryParseToNumber(TriangleEntity);
-            if (!string.IsNullOrEmpty(retVal)) return retVal;
-            retVal = _numValidation.GreaterThanZero(TriangleEntity);
-            if (!string.IsNullOrEmpty(retVal)) return retVal;
-            retVal = _triangleAxisesValidation.AxisesValidForTriangle(TriangleEntity);
-            return retVal;
+            try
+            {
+                var retVal = _numValidation.GreaterThanZero(TriangleEntity);
+                if (!string.IsNullOrEmpty(retVal)) return retVal;
+                retVal = _triangleAxisesValidation.AxisesValidForTriangle(TriangleEntity);
+                return retVal;
+            }
+            catch (NullReferenceException nullRefEx)
+            {
+                return nullRefEx.Message;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         /// <inheritdoc />
         /// <summary>
         /// Gets Triangle type.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns TriangleT type.</returns>
         public TriangleType GetTriangleType()
         {
-            return TriangleEntity.FindTriangle();
+            try
+            {
+                return TriangleEntity.FindTriangle();
+            }
+            catch (InvalidOperationException invalOperaEx)
+            {
+                throw invalOperaEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <inheritdoc />
