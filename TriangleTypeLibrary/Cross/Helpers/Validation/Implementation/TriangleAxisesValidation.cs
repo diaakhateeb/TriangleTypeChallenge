@@ -19,7 +19,7 @@ namespace TriangleTypeLibrary.Cross.Helpers.Validation.Implementation
         {
             if (!(entity.Length + entity.Height > entity.Base) || !(entity.Length + entity.Base > entity.Height) ||
                 !(entity.Height + entity.Base > entity.Length))
-                return TriangleType.Unknown + "Unknown triangle type. Triangle passed values are invalid.";
+                return TriangleType.Unknown + " triangle type. Triangle passed values are invalid.";
             return string.Empty;
         }
     }
