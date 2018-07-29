@@ -18,22 +18,22 @@ It has the core functionality of the solution where all processing gets placed. 
 **1.1. Core Layer:**
 
  - The **[ITriangleFactory](https://github.com/diaakhateeb/TriangleTypeChallenge/blob/master/TriangleTypeLibrary/Core/Interfaces/Factory/ITriangleFactory.cs)**  interface is responsible for safely instantiating repository object using IoC Unity container in respect to Dependency Injection SOLID principle. It has **GetInstance** method that returns Generic type (T) that is identified by the caller.
- - The **ITriangleRepository**  interface is the gateway to the outer world as it responsible for bringing client parameters to the core layer and brings the result back to the client (caller). It has **GetTriangleType** and **ValidateTriangleValues** methods in addition to **TriangleEntity** property.
+ - The **[ITriangleRepository](https://github.com/diaakhateeb/TriangleTypeChallenge/blob/master/TriangleTypeLibrary/Core/Interfaces/Repository/ITriangleRepository.cs)**  interface is the gateway to the outer world as it responsible for bringing client parameters to the core layer and brings the result back to the client (caller). It has **GetTriangleType** and **ValidateTriangleValues** methods in addition to **TriangleEntity** property.
    - **GetTriangleType** method calls **FindTriangle** method of **TriangleEntity** class to check against passed parameters and returns **TriangleType** Enum value. Triangle Type can be Equilateral, Isosceles, Scalene or Unknown.
    - **ValidateTriangleValues** method is responsible for applying the core checks against the passed triangle values and returns result in string object that is empty if no errors or has an error message if any of the checks failed.
    - **TriangleEntity** property is the gateway to initialize the Length, Height and Base Triangle core properties.
- - **TriangleTypeEnum** is the enumeration type which contains triangle type list (Equilateral, Isosceles, Scalene and Unknown).
+ - **[TriangleTypeEnum](https://github.com/diaakhateeb/TriangleTypeChallenge/blob/master/TriangleTypeLibrary/Core/Enums/TriangleTypeEnum.cs)** is the enumeration type which contains triangle type list (Equilateral, Isosceles, Scalene and Unknown).
 
 **1.2 Cross Layer:**
 It has helper classes that are used across the solution boundary.
 
  - Validation interfaces and classes that are used to validate passed Triangle values.
- - **INumericValidation** interface that provides method **GreaterThanZero** to check if triangle values are not equal to zero or negative.
- - **ITriangleAxisesValidation** interface that exposes **AxisesValidForTriangle** method to check if the passed values are valid values for a triangle (*if two sides summation are greater than the third side*).
+ - **[INumericValidation](https://github.com/diaakhateeb/TriangleTypeChallenge/blob/master/TriangleTypeLibrary/Cross/Helpers/Validation/Interfaces/INumericValidation.cs)** interface that provides method **GreaterThanZero** to check if triangle values are not equal to zero or negative.
+ - **[ITriangleAxisesValidation](https://github.com/diaakhateeb/TriangleTypeChallenge/blob/master/TriangleTypeLibrary/Cross/Helpers/Validation/Interfaces/ITriangleAxisesValidation.cs)** interface that exposes **AxisesValidForTriangle** method to check if the passed values are valid values for a triangle (*if two sides summation are greater than the third side*).
 
 **1.3 Model Layer:**
 It exposes the solution entities such as Triangle Entity.
- - **IEntity** interface that provides the core function of finding triangle type **FindTriangle** and the main triangle three properties **Length**, **Height** and **Base**.
+ - **[IEntity](https://github.com/diaakhateeb/TriangleTypeChallenge/blob/master/TriangleTypeLibrary/Model/Interfaces/IEntity.cs)** interface that provides the core function of finding triangle type **FindTriangle** and the main triangle three properties **Length**, **Height** and **Base**.
 
  ### 2. Triangle Client:
  It is the consumer or caller application that performs the following sequence to get the triangle type:
@@ -51,7 +51,7 @@ It exposes the solution entities such as Triangle Entity.
 - If no errors returned, call **GetTriangleType** main function that returns triangle type Enum value.
 
 ### 3. Unit Testing:
-It has two classes **UnitTestInputValidation** and **UnitTestGetTriangleType**.
+It has two classes **[UnitTestInputValidation](https://github.com/diaakhateeb/TriangleTypeChallenge/blob/master/TriangleTypeChallengeUnitTest/UnitTestInputValidation.cs)** and **[UnitTestGetTriangleType](https://github.com/diaakhateeb/TriangleTypeChallenge/blob/master/TriangleTypeChallengeUnitTest/UnitTestGetTriangleType.cs)**.
 - **UnitTestGetTriangleType**: Has four unit tests for checking triangle types  **TestMethod_Get_Triangle_Type_Equilateral**, **TestMethod_Get_Triangle_Type_Equilateral_Against_Isosceles**, **TestMethod_Get_Triangle_Type_Equilateral_Against_Scalene**, **TestMethod_Get_Triangle_Type_Isosceles_Against_Scalene** and  **TestMethod_Get_Triangle_Type_Scalene**.
 - **UnitTestInputValidation**: Has four unit tests for passed triangle values **TestMethod_Validate_Axises_Values_When_Grater_Than_Zero**, **TestMethod_Validate_Axises_Values_When_Less_Than_Zero**, **TestMethod_Validate_Axises_Against_Unknown_Triangle_Type** and **TestMethod_Invalidate_Axises_Against_Unknown_Triangle_Type**.
 
