@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TriangleTypeLibrary.Core.Enums;
 using TriangleTypeLibrary.Core.Implementation.Factory;
 using TriangleTypeLibrary.Core.Implementation.Repository;
@@ -14,7 +15,18 @@ namespace TriangleTypeChallengeUnitTest
 
         public UnitTestGetTriangleType()
         {
-            _triangle = new TriangleFactory<TriangleRepository>().GetInstance();
+            try
+            {
+                _triangle = new TriangleFactory<TriangleRepository>().GetInstance();
+            }
+            catch (NullReferenceException nullRefEx)
+            {
+                throw nullRefEx;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [TestMethod]
