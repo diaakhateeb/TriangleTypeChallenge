@@ -19,9 +19,9 @@ It has the core functionality of the solution where all processing gets placed. 
 
  - The **[ITriangleFactory](https://github.com/diaakhateeb/TriangleTypeChallenge/blob/master/TriangleTypeChallenge/Interfaces/ITriangleFactory.cs)**  interface is responsible for safely instantiating repository object using IoC Unity container in respect to Dependency Injection SOLID principle. It has **GetInstance** method that returns Generic type (T) that is identified by the caller.
  - The **ITriangleRepository**  interface is the gateway to the outer world as it responsible for bringing client parameters to the core layer and brings the result back to the client (caller). It has **GetTriangleType** and **ValidateTriangleValues** methods in addition to **TriangleEntity** property.
- - **GetTriangleType** method calls **FindTriangle** method of **TriangleEntity** class to check against passed parameters and returns **TriangleType** Enum value. Triangle Type can be Equilateral, Isosceles, Scalene or Unknown.
- - **ValidateTriangleValues** method is responsible for applying the core checks against the passed triangle values and returns result in string object that is empty if no errors or has an error message if any of the checks failed.
- - **TriangleEntity** property is the gateway to initialize the Length, Height and Base Triangle core properties.
+   - **GetTriangleType** method calls **FindTriangle** method of **TriangleEntity** class to check against passed parameters and returns **TriangleType** Enum value. Triangle Type can be Equilateral, Isosceles, Scalene or Unknown.
+   - **ValidateTriangleValues** method is responsible for applying the core checks against the passed triangle values and returns result in string object that is empty if no errors or has an error message if any of the checks failed.
+   - **TriangleEntity** property is the gateway to initialize the Length, Height and Base Triangle core properties.
  - **TriangleTypeEnum** is the enumeration type which contains triangle type list (Equilateral, Isosceles, Scalene and Unknown).
 
 **1.2 Cross Layer:**
@@ -29,7 +29,6 @@ It has helper classes that are used across the solution boundary.
 
  - Validation interfaces and classes that are used to validate passed Triangle values.
  - **INumericValidation** interface that provides method **GreaterThanZero** to check if triangle values are not equal to zero or negative.
- - **IParseToNumberValidation** interface that provides method **TryParseToNumber** to check if triangle values are not string.
  - **ITriangleAxisesValidation** interface that exposes **AxisesValidForTriangle** method to check if the passed values are valid values for a triangle (*if two sides summation are greater than the third side*).
 
 **1.3 Model Layer:**
@@ -61,6 +60,3 @@ As a simple solution, it applies one SOLID principle and two design patterns.
 - **Dependency Inversion Principle**: DI principle aims to decouple the high level components implementation from the low level ones and both should depends on abstraction (Interfaces). The solution here applies such principle using Microsoft Unity container IoC (Inversion of Control), and It is used through the Factory pattern class to instantiate Repository pattern class object. It injects validations objects parameters through the constructor.
 - **Factory Pattern**: It is one of the creational patterns that aims to create class object without having to specify the exact class of the object that will be created. It is common pattern and widely used nowadays as it fits all software applications sizes. The solution applies it in conjunction with the IoC Unity to create Repository class object.
 - **Repository Pattern**: It is widely used in the DDD, and it builds an interface between the core components and outer world. It decouples the business layer from the front layer such as providing database model functions to the business layer. This gives us the liberality to change database or the model as a whole with no need to change the business layer implementation. The solution applies it to expose the validation, get triangle type methods and triangle entity property.
-
-## License
-This project is licensed under the [MIT License](https://github.com/diaakhateeb/C-Sharp-Algorithms/blob/master/LICENSE).
