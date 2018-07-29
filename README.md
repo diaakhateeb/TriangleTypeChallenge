@@ -17,7 +17,7 @@ It has the core functionality of the solution where all processing gets placed. 
 
 **1.1. Core Layer:**
 
- - The **[ITriangleFactory](https://github.com/diaakhateeb/TriangleTypeChallenge/blob/master/TriangleTypeChallenge/Interfaces/ITriangleFactory.cs)**  interface is responsible for safely instantiating repository object using IoC Unity container in respect to Dependency Injection SOLID principle. It has **GetInstance** method that returns Generic type (T) that is identified by the caller.
+ - The **[ITriangleFactory](https://github.com/diaakhateeb/TriangleTypeChallenge/blob/master/TriangleTypeLibrary/Core/Interfaces/Factory/ITriangleFactory.cs)**  interface is responsible for safely instantiating repository object using IoC Unity container in respect to Dependency Injection SOLID principle. It has **GetInstance** method that returns Generic type (T) that is identified by the caller.
  - The **ITriangleRepository**  interface is the gateway to the outer world as it responsible for bringing client parameters to the core layer and brings the result back to the client (caller). It has **GetTriangleType** and **ValidateTriangleValues** methods in addition to **TriangleEntity** property.
    - **GetTriangleType** method calls **FindTriangle** method of **TriangleEntity** class to check against passed parameters and returns **TriangleType** Enum value. Triangle Type can be Equilateral, Isosceles, Scalene or Unknown.
    - **ValidateTriangleValues** method is responsible for applying the core checks against the passed triangle values and returns result in string object that is empty if no errors or has an error message if any of the checks failed.
