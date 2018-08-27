@@ -28,9 +28,10 @@ namespace TriangleTypeChallengeClient
                     Base = double.Parse(TextBoxTriangleBase.Text)
                 };
                 var validationRes = _triangle.ValidateTriangleValues();
-                if (string.IsNullOrEmpty(validationRes))
+                if (!string.IsNullOrEmpty(validationRes))
+                    MessageBox.Show(validationRes);
+                else
                     LabelTriangleTypeResult.Text = _triangle.GetTriangleType().ToString();
-                else MessageBox.Show(validationRes);
             }
             catch (Exception ex)
             {
