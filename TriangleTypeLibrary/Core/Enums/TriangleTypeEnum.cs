@@ -20,7 +20,6 @@
         /// <summary>
         /// Not Triangle.
         /// </summary>
-        Unknown = -1,
-        Qqq = 6
+        Unknown = -1
     }
 }
