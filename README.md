@@ -1,4 +1,5 @@
-# Triangle Type Challenge
+# Triangle Type Challenge [![Build status](https://ci.appveyor.com/api/projects/status/9ioo2b0ivmomgs6a?svg=true)](https://ci.appveyor.com/project/diaakhateeb/triangletypechallenge)
+
 
 The solution objective is to find type of triangle according to the lengths of its sides.
 
